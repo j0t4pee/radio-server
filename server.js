@@ -9,9 +9,9 @@ app.use(express.json());
 app.post("/get-token", (request, response) => {
   const roomName = "118.100"; 
   const participantName = request.body.playerName || `Piloto_${Math.floor(Math.random() * 1000)}`;
-
-  const apiKey = "APIofXJUi67whfc";
-  const apiSecret = "ec6NeSWTnJrSEFTCQJIeYlfGFa3WgPESaI4ysQHM17iC";
+  
+  const apiKey = "APIt6zYj4vbG48R";
+  const apiSecret = "YBNegIe6ts1Zf6kVQmBjBPSBcG8UlYv49yIHZJSyseGA";
 
   try {
     const at = new AccessToken(apiKey, apiSecret, { identity: participantName });
