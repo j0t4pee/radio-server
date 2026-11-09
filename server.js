@@ -6,10 +6,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post("/get-token", (request, response) => {
+// Adicionámos a palavra "async" aqui
+app.post("/get-token", async (request, response) => {
   const roomName = "118.100"; 
   const participantName = request.body.playerName || `Piloto_${Math.floor(Math.random() * 1000)}`;
-  
+
   const apiKey = "APIt6zYj4vbG48R";
   const apiSecret = "YBNegIe6ts1Zf6kVQmBjBPSBcG8UlYv49yIHZJSyseGA";
 
@@ -18,7 +19,9 @@ app.post("/get-token", (request, response) => {
     at.addGrant({ roomJoin: true, room: roomName, canPublish: true, canSubscribe: true });
     at.ttl = "12h";
 
-    response.json({ token: at.toJwt() });
+    const tokenString = await at.toJwt();
+    response.json({ token: tokenString });
+    
   } catch (error) {
     response.status(500).json({ error: "Erro ao gerar token" });
   }
